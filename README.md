@@ -8,10 +8,9 @@ For example, I'm a big fan of Let's Plays and particularly like watching Markipl
 Now, maybe weeks go on by until Markiplier finally uploads a video of the new FNAF. When that happens, my web app will email me a link to the video instead of me having to go on YouTube every hour of the day for weeks on end to check if Markiplier has uploaded a video of my interest.
 
 # TODOs
-* Create Redis schema.
-* Add models to a separate JS file.
-* Import file into prowl.js.
-* Set up routes.
+* Set up server.js
+* Set up routes in prowl.js.
+* Work on service.js - the meat of this project.
 
 # NOTES to SELF
 * To fetch a Youtuber's Playlist ID GET: https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=chaoticmonki&key={YOUR_API_KEY}
