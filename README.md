@@ -12,3 +12,13 @@ Now, maybe weeks go on by until Markiplier finally uploads a video of the new FN
 * Add models to a separate JS file.
 * Import file into prowl.js.
 * Set up routes.
+
+# NOTES to SELF
+* To fetch a Youtuber's Playlist ID GET: https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=chaoticmonki&key={YOUR_API_KEY}
+
+  Should be under contentDetails:relatedPlaylists:uploads
+* set channel:presshearttocontinue UU_ufxdQbKBrrMOiZ4LzrUyA
+* set channel:markiplier UUxubOASK0482qC5psq89MsQ
+* set channel:chaoticmonki UUu2yrDg7wROzElRGoLQH82A
+
+can set a phrase with ""
