@@ -8,8 +8,13 @@
 var redis = require('redis');
 var client = redis.createClient();
 
+//set up youtube connection
 var youtube = require('youtube-api');
-
+var api_key = require('./credentials.js');
+youtube.authenticate({
+    type: 'key',
+    key: api_key,
+  });
 
 // GET functions
 //=======================================================================
@@ -102,16 +107,71 @@ exports.deleteKeyword = function(email, channel, keyword, cb) {
 // POST FUNCTIONS
 //=======================================================================
 
-/*exports.addChannel = function(channel, cb) {
+//Add a channel to the list.
+exports.addChannel = function(channel, cb) {
   client.sadd(['channel', channel], function(err, reply) {
     if (err) {
       console.log(err);
     } else {
-      addChannelID(channel, function())
+      console.log(reply);
+    }
+  });
+};
+
+//Add the ID for a channel
+exports.addChannelID = function(channel, cb) {
+  var key = 'channel:'.concat(channel);
+
+  //find the id for the channel
+  youtube.channels.list({
+    part: 'contentDetails',
+    forUsername: channel
+    }, function(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+
+        //assign the id to the channel
+        var channelID = data.items[0].contentDetails.relatedPlaylists.uploads;
+        console.log(channelID);
+        client.set(key, channelID, function(err, reply) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(reply);
+          }
+      });
+    }
+  });
+};
+
+exports.addProwler = function(email, cb) {
+  client.sadd('prowler', email, function(err, reply) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(reply);
+    }
+  });
+};
+
+addProwlerChannel = function(email, channel, cb) {
+  var key = 'prowler:'.concat(email);
+  client.sadd(key, channel, function(err, reply) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(reply);
     }
   })
-}*/
-//add to channel
-//add to prowler
+};
+
+addProwlerChannel('blerg@blergh.com', 'rage',function(err, docs) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(docs);
+  }
+});
 //add channel to prowler:[email]
 //add keywords to prowler:[email]
