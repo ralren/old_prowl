@@ -145,6 +145,7 @@ exports.addChannelID = function(channel, cb) {
   });
 };
 
+//Add email to prowler list.
 exports.addProwler = function(email, cb) {
   client.sadd('prowler', email, function(err, reply) {
     if (err) {
@@ -155,7 +156,8 @@ exports.addProwler = function(email, cb) {
   });
 };
 
-addProwlerChannel = function(email, channel, cb) {
+//Add channel to prowler's list.
+exports.addProwlerChannel = function(email, channel, cb) {
   var key = 'prowler:'.concat(email);
   client.sadd(key, channel, function(err, reply) {
     if (err) {
@@ -163,15 +165,17 @@ addProwlerChannel = function(email, channel, cb) {
     } else {
       console.log(reply);
     }
-  })
+  });
 };
 
-addProwlerChannel('blerg@blergh.com', 'rage',function(err, docs) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(docs);
-  }
-});
-//add channel to prowler:[email]
-//add keywords to prowler:[email]
+//Add keywords to prowler and designated channel
+exports.addKeywords = function(email, channel, keywords, cb) {
+  var key = 'prowler:'.concat(email, ':', channel);
+  client.sadd(key, keywords, function(err, reply) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(reply);
+    }
+  });
+};
