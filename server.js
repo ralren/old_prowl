@@ -14,7 +14,7 @@ var youtube = require('youtube-api');
 // GET functions
 //=======================================================================
 
-//Fetch all emails/prowlers
+//Fetch all emails/prowlers.
 exports.getProwlers = function(cb) {
   client.smembers('prowler', function(err, prowlers) {
     if (err) {
@@ -25,7 +25,7 @@ exports.getProwlers = function(cb) {
   });
 };
 
-//Fetch all channels for an email/prowler
+//Fetch all channels for an email/prowler.
 exports.getChannels = function(email, cb) {
   var key = 'prowler:'.concat(email);
   client.smembers(key, function(err, channels) {
@@ -35,9 +35,9 @@ exports.getChannels = function(email, cb) {
       cb(null, channels);
     }
   });
-}
+};
 
-//Fetch all keys for an email/prowler
+//Fetch all keys for an email/prowler.
 exports.getKeywords = function(email, channel, cb) {
   var key = 'prowler:'.concat(email, ':', channel);
   client.smembers(key, function(err, keywords) {
@@ -47,8 +47,9 @@ exports.getKeywords = function(email, channel, cb) {
       cb(null, keywords);
     }
   });
-}
+};
 
+//Fetch playlistID of a channel.
 exports.getChannelID = function(channel, cb) {
   var key = 'channel:'.concat(channel);
   client.get(key, function(err, playlistID) {
@@ -57,15 +58,46 @@ exports.getChannelID = function(channel, cb) {
     } else {
       cb(null, playlistID);
     }
-  })
-}
+  });
+};
 
-// DELETE FUNCTIONS
+// DELETE functions
 //=======================================================================
 
-//delete prowler
-//delete channel from prowler:[email]
-//delete keywords from prowler:[email]
+//Delete an email
+exports.deleteProwler = function(email, cb) {
+  client.srem('prowler', email, function(err, reply) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(reply);
+    }
+  });
+};
+
+//Delete a channel from an email.
+exports.deleteChannel = function(email, channel, cb) {
+  var key = 'prowler:'.concat(email);
+  client.srem(key, channel, function(err, reply) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(reply);
+    }
+  });
+};
+
+//Delete a keyword from an email's channel.
+exports.deleteKeyword = function(email, channel, keyword, cb) {
+  var key = 'prowler:'.concat(email, ':', channel);
+  client.srem(key, keywords, function(err, reply) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(reply);
+    }
+  });
+};
 
 // POST FUNCTIONS
 //=======================================================================
