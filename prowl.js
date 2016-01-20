@@ -2,8 +2,6 @@
 
 //BASE SETUP
 //=======================================================================
-//https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
-//https://scotch.io/tutorials/setting-up-a-mean-stack-single-page-application
 
 //Import modules.
 var express = require('express');
@@ -48,58 +46,60 @@ app.post('/', function(req, res){
   if (!email || !channel || !keywords) {
     var message = "Whoops! Fields were missing!";
     res.render('home', {title: 'prowl', message: message});
+  } else {
+
+    //check if channel exists
+    server.channelExists(channel, function(result, cb) {
+      console.log(result);
+      if (!result) {
+        var message = "Sorry, channel doesn't exist!";
+        res.render('home', {title: 'prowl', message: message});
+      } else {
+
+        //add everything because sets don't allow duplicates anyways
+        server.addProwler(email, function(reply) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(reply);
+          }
+        });
+
+        server.addProwlerChannel(email, channel, function(reply) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(reply);
+          }
+        });
+
+        server.addChannel(channel, function(reply) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(reply);
+          }
+        });
+
+        server.addChannelID(channel, function(reply){
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(reply);
+          }
+        });
+
+        server.addKeywords(email, channel, keywords, function(reply) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(reply);
+          }
+        });
+        res.render('home', {title: 'prowl', message: "Welcome to the system!"});
+      }
+    });
   }
-
-  //check if channel exists
-  server.channelExistence(channel, function(result, cb) {
-    if (result < 0) {
-      var message = "Sorry, channel doesn't exist!";
-      res.render('home', {title: 'prowl', message: message});
-    }
-  });
-
-  //if email doesn't exist already, add it
-  server.isProwler(email, function(result) {
-    if (!result) {
-      server.addProwler(email, function(reply) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(reply);
-        }
-      });
-    }
-  });
-
-  //if channel doesn't exist under the prowler already, add it
-  server.isProwlerChannel(email, channel, function(result) {
-    if (!result) {
-      server.addProwlerChannel(email, channel, function(reply) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(reply);
-        }
-      });
-    }
-  });
-
-  //if channel doesn't exist under channels, add it
-
-  //if keywords doesn't exist already, add it
-  server.isKeywords(email, channel, keywords, function(result) {
-    if (!result) {
-      server.addKeywords(email, channel, keywords, function(reply) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(reply);
-        }
-      });
-    }
-  });
-
-  res.render('home', {title: 'prowl', message: "Welcome to the system!"});
 });
 
 //START THE SERVER
