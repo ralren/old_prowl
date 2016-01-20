@@ -8,5 +8,5 @@ For example, I'm a big fan of Let's Plays and particularly like watching Markipl
 Now, maybe weeks go on by until Markiplier finally uploads a video of the new FNAF. When that happens, my web app will email me a link to the video instead of me having to go on YouTube every hour of the day for weeks on end to check if Markiplier has uploaded a video of my interest.
 
 # TODOs
-* Set up routes in prowl.js.
+* Finish front-end.
 * Work on service.js - the meat of this project.

@@ -71,7 +71,7 @@ app.post('/', function(req, res){
     }
   });
 
-  //if channel doesn't exist already, add it
+  //if channel doesn't exist under the prowler already, add it
   server.isProwlerChannel(email, channel, function(result) {
     if (!result) {
       server.addProwlerChannel(email, channel, function(reply) {
@@ -83,6 +83,8 @@ app.post('/', function(req, res){
       });
     }
   });
+
+  //if channel doesn't exist under channels, add it
 
   //if keywords doesn't exist already, add it
   server.isKeywords(email, channel, keywords, function(result) {
