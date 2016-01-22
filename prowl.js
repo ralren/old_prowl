@@ -96,7 +96,7 @@ app.post('/', function(req, res){
             console.log(reply);
           }
         });
-        res.render('home', {title: 'prowl', message: "Welcome to the system!"});
+        res.render('home', {title: 'prowl', message: "Everything is good to go!"});
       }
     });
   }

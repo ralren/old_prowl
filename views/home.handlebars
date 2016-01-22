@@ -7,22 +7,35 @@
 //
 -->
 
+<div class="page-header">
+  <h1>PR<span class="glyphicon glyphicon-play-circle" id=adjust-height aria-hidden="true"></span>WL</h1>
+  <p><b>Subscribe to a video series, not a channel!</b></p>
+</div>
 
-<h1>Prowl</h1>
-<p>Subscribe to a video series, not a channel!</p>
+<div class="container-fluid display: block" id="narrower" >
+  <p>Prowl is a simple web app that emails people if a video from one of their
+    favorite series has been uploaded. This could be a webseries, a vlog series,
+    or just any categorized content by a YouTube channel.</p>
 
-<form class="form-inline" method="post" action="/">
-  <div class="form-group">
-    <label for="prowlerEmail">Email</label>
-    <input type="email" class="form-control" name="email" placeholder="example@gmail.com">
-  </div>
-  <div class="form-group">
-    <label for="prowlerChannel">Channel</label>
-    <input type="channel" class="form-control" name="channel" placeholder="chaoticmonki">
-  </div>
-  <div class="form-group">
-    <label for="prowlerKeywords">Keywords</label>
-    <input type="keywords" class="form-control" name="keywords" placeholder="livestream tonight">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+  <p>Just give your email, the username behind the channel, and a word or phrase that the
+    video series always puts in the name of its videos - most likely the title of
+    the video series itself!</p>
+</div>
+
+<div class="container-fluid display: block">
+  <form class="form-inline" method="post" action="/">
+    <div class="form-group">
+      <label for="prowlerEmail">Email</label>
+      <input type="email" class="form-control" name="email" placeholder="example@gmail.com">
+    </div>
+    <div class="form-group">
+      <label for="prowlerChannel">Channel</label>
+      <input type="channel" class="form-control" name="channel" placeholder="chaoticmonki">
+    </div>
+    <div class="form-group">
+      <label for="prowlerKeywords">Keywords</label>
+      <input type="keywords" class="form-control" name="keywords" placeholder="livestream tonight">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
