@@ -9,11 +9,8 @@ var app = express();
 var handlebars  = require('express-handlebars');
 var bodyParser = require('body-parser');
 
-//Import database.
-//var db = require('./lib/server.js');
-
 //Import authentication library.
-var server = require('./lib/server.js');
+var database = require('./lib/database.js');
 
 app.set('port', process.env.PORT || 3000);
 
@@ -49,7 +46,7 @@ app.post('/', function(req, res){
   } else {
 
     //check if channel exists
-    server.channelExists(channel, function(result, cb) {
+    database.channelExists(channel, function(result, cb) {
       console.log(result);
       if (!result) {
         var message = "Sorry, channel doesn't exist!";
@@ -57,7 +54,7 @@ app.post('/', function(req, res){
       } else {
 
         //add everything because sets don't allow duplicates anyways
-        server.addProwler(email, function(reply) {
+        database.addProwler(email, function(reply) {
           if (err) {
             console.log(err);
           } else {
@@ -65,7 +62,7 @@ app.post('/', function(req, res){
           }
         });
 
-        server.addProwlerChannel(email, channel, function(reply) {
+        database.addProwlerChannel(email, channel, function(reply) {
           if (err) {
             console.log(err);
           } else {
@@ -73,7 +70,7 @@ app.post('/', function(req, res){
           }
         });
 
-        server.addChannel(channel, function(reply) {
+        database.addChannel(channel, function(reply) {
           if (err) {
             console.log(err);
           } else {
@@ -81,7 +78,7 @@ app.post('/', function(req, res){
           }
         });
 
-        server.addChannelID(channel, function(reply){
+        database.addChannelID(channel, function(reply){
           if (err) {
             console.log(err);
           } else {
@@ -89,7 +86,7 @@ app.post('/', function(req, res){
           }
         });
 
-        server.addKeywords(email, channel, keywords, function(reply) {
+        database.addKeywords(email, channel, keywords, function(reply) {
           if (err) {
             console.log(err);
           } else {
@@ -102,7 +99,7 @@ app.post('/', function(req, res){
   }
 });
 
-//START THE SERVER
+//START THE database
 //=======================================================================
 app.listen(app.get('port'), function () {
 	console.log('Express started on http://localhost:' +
